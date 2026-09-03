@@ -5,9 +5,9 @@ import resumeUrl from '../resume.pdf';
 import '../style.css';
 
 const skills = [
-  ['Backend', <>Java · Spring Boot · Spring MVC<br />JPA · Querydsl · REST API</>],
-  ['Data & Search', <>MySQL · Elasticsearch<br />MinIO · Apache Parquet</>],
-  ['Security & AI', <>Spring Security · JWT · OAuth2<br />LLM API · Prompt Design · RAG</>],
+  ['Backend', <>Java · Spring Boot<br />JPA · Querydsl · REST API</>],
+  ['Data & Search', <>MySQL<br /></>],
+  ['Security & AI', <>Spring Security · JWT · OAuth2<br />LLM API· RAG</>],
   ['Tools', <>Gradle · Docker · Swagger/OpenAPI<br />Git · GitHub</>],
 ];
 
@@ -40,7 +40,7 @@ function Hero() {
 function About() {
   return <section id="about" className="section-wrap two-column">
     <div><p className="eyebrow">ABOUT ME</p><h2>문제를 구조화하고<br />끝까지 개선합니다.</h2></div>
-    <div className="body-copy"><p>백엔드 개발에서는 업무를 도메인 모델과 API로 구조화하는 데 관심이 있으며</p><p>자연어 질문을 검색 조건으로 변환하고 결과를 답변으로 제공하는 LLM 기능을 개발하며 백엔드와 AI를 연결하는 경험을 했습니다.</p><p>WMS 개발 경험을 통해 물류 현장의 업무 흐름과 창고시스템의 구조를 이해하고, 사용자의 작업을 뒷받침하는 시스템을 고민해 왔습니다.</p></div>
+    <div className="body-copy"><p>백엔드 개발에서는 업무를 도메인 모델과 API로 구조화하는 데 관심이 있으며</p><p>자연어 질문을 검색 조건으로 변환하고 결과를 답변으로 제공하는 LLM 기능을 개발하며 백엔드와 AI를 연결하는 경험을 했습니다.</p><p>WMS 개발 경험을 통해 물류 자동화 현장의 업무 흐름과 창고시스템의 구조를 이해하고, 사용자의 작업을 뒷받침하는 시스템을 고민해 왔습니다.</p></div>
   </section>;
 }
 
