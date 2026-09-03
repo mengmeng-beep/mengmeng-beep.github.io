@@ -126,7 +126,7 @@ function Education() {
 }
 
 function Contact() {
-  return <section id="contact" className="contact section-wrap"><p className="eyebrow">07 / CONTACT</p><h2>함께 좋은 시스템을<br />만들고 싶습니다.</h2><p className="contact-copy">문제를 함께 정의하고, 오래 유지되는 해결책을 고민하는 대화를 기다립니다.</p><div className="contact-info"><a className="email" href="mailto:jommeng2@naver.com">jommeng2@naver.com</a><a href="tel:01090926655">010-9092-6655</a></div><div className="contact-links"><a href="https://github.com/mengmeng-beep" target="_blank" rel="noreferrer">GitHub ↗</a><a href={resumeUrl}>이력서 PDF 다운로드 ↗</a></div></section>;
+  return <section id="contact" className="contact section-wrap"><p className="eyebrow">07 / CONTACT</p><h2>함께 좋은 시스템을<br />만들고 싶습니다.</h2><p className="contact-copy">문제를 함께 정의하고, 오래 유지되는 해결책을 고민하는 대화를 기다립니다.</p><div className="contact-info">jommeng2@naver.com<br />010-0000-0000</div><div className="contact-links"><a href="https://github.com/mengmeng-beep" target="_blank" rel="noreferrer">GitHub ↗</a><a href={resumeUrl}>이력서 PDF 다운로드 ↗</a></div></section>;
 }
 
 export default function App() {
