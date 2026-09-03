@@ -1,51 +1,74 @@
 import { useEffect, useState } from 'react';
 import systemArchitecture from '../images/Architecture_system.png';
 import aiArchitecture from '../images/architecture_ai.png';
+import profileImage from '../images/me.jpg';
 import resumeUrl from '../resume.pdf';
 import '../style.css';
 
-const skills = [
-  ['Backend', <>Java · Spring Boot<br />JPA · Querydsl · REST API</>],
-  ['Data & Search', <>MySQL<br /></>],
-  ['Security & AI', <>Spring Security · JWT · OAuth2<br />LLM API· RAG</>],
-  ['Tools', <>Gradle · Docker · Swagger/OpenAPI<br />Git · GitHub</>],
+const skillGroups = [
+  { title: 'Languages', items: [['Java', '상'], ['JavaScript', '중'], ['Python', '중']] },
+  { title: 'Backend / Framework', items: [['Spring', '상'], ['Spring Data JPA', '중'], ['FastAPI', '중']] },
+  { title: 'Frontend', items: [['React', '중'], ['jQuery', '중']] },
+  { title: 'Database', items: [['Oracle', '중'], ['Vector DB', '중']] },
+  { title: 'Domain & AI', items: [['LLM / RAG', '중'], ['PLC 연동', '중'], ['WMS', '상']] },
 ];
 
-const tags = ['Java 21', 'Spring Boot', 'JPA', 'MySQL', 'Elasticsearch', 'LLM'];
-const projectPoints = [
-  '가격·거래동향 및 지역·단지 검색 API 개발',
-  '자연어 질문 의도 분류와 구조화된 검색 조건 생성',
-  'JWT·OAuth2 인증 및 권한 처리',
-  '서비스·검색·보안 영역 테스트 작성',
+const projects = [
+  {
+    number: '01', title: 'WMS 자동화 시스템', summary: '물류센터의 작업 흐름을 연결하고 자동화한 창고관리시스템',
+    problem: '피킹부터 출고까지 이어지는 물류 데이터가 분리되어 작업 흐름과 재고 상태를 빠르게 확인하기 어려웠습니다.',
+    role: 'WMS 구축·고도화와 PLC 연동을 담당하고, 작업 동선과 출고 데이터 흐름을 시스템에 반영했습니다.',
+    stack: ['Java', 'Oracle', 'JSP', 'JPA', 'PLC', 'WMS'],
+    result: '피킹-출고 데이터 흐름을 자동화하고 작업 동선을 개선해 출고 처리 시간을 단축했습니다. 정확한 수치는 추후 보강 예정입니다.',
+    image: systemArchitecture,
+  },
+  {
+    number: '02', title: '싸부 RAG 챗봇 / QA 시스템', summary: '문서를 검색하고 근거 기반 답변을 생성하는 질의응답 시스템',
+    problem: '사용자가 많은 학습 문서에서 원하는 내용을 직접 찾아야 해 질문에 대한 답을 얻는 데 시간이 걸렸습니다.',
+    role: '문서 임베딩부터 벡터DB 저장, 검색, LLM 응답까지 RAG 파이프라인을 설계하고 구현했습니다.',
+    stack: ['Python', 'FastAPI', 'Embedding', 'Vector DB', 'LLM', 'RAG'],
+    result: '자연어 질문을 문서 검색과 연결해, 관련 근거를 바탕으로 답변하는 QA 흐름을 구현했습니다.',
+    image: aiArchitecture,
+  },
+  {
+    number: '03', title: '개인 학습 프로젝트', summary: '데이터를 읽고 문제를 발견하는 백엔드 실험 공간',
+    problem: '새로운 기술을 단편적으로 익히는 데서 벗어나 데이터 수집부터 API 제공까지 한 흐름으로 경험하고 싶었습니다.',
+    role: '관심 있는 공개 데이터를 정리하고, 조회 API와 간단한 분석 화면을 직접 설계하는 프로젝트로 확장할 예정입니다.',
+    stack: ['Java', 'Spring Boot', 'React', 'REST API'],
+    result: '구체적인 주제와 결과는 프로젝트 진행 후 업데이트할 예정입니다.',
+  },
+];
+
+const experience = [
+  { period: '2016.11 — 2025.12', company: '㈜유로', role: '온라인 커머스 총괄 디렉터', result: '해외 소싱, 국내 유통·판매, 내부 시스템 관리까지 커머스 전 과정을 주도했습니다. 구체적인 성과 수치는 추후 보강 예정입니다.' },
+  { period: '2014.02 — 2016.11', company: '㈜진코퍼레이션', role: 'WMS 개발', result: '스마트 물류센터와 자동화 공장의 WMS 구축·고도화를 총괄했습니다. 피킹부터 출고까지의 데이터 흐름을 자동화하고 PLC를 연동해 출고 처리 시간을 단축했습니다.' },
 ];
 
 function Header() {
   return <header className="site-header">
-    <a className="logo" href="#top">JIUN</a>
-    <nav>
-      <a href="#about">소개</a><a href="#projects">프로젝트</a><a href="#skills">기술</a><a href="#contact">연락처</a>
+    <a className="logo" href="#top">KIM JIWOON</a>
+    <nav aria-label="주요 메뉴">
+      <a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
     </nav>
   </header>;
 }
 
 function Hero() {
   return <section className="hero section-wrap">
-    <p className="eyebrow">BACKEND DEVELOPER · WMS · LLM</p>
-    <h1>업무의 흐름을 이해하고<br /><span>서비스로 구현합니다.</span></h1>
-    <p className="hero-copy">- WMS 개발 경험을 바탕으로 창고시스템의 이해<br />- 백엔드 프로젝트를 통해 데이터 흐름과 API 설계 경험<br />- LLM을 활용한 자연어 처리 및 검색 기능 개발</p>
-    <div className="actions"><a className="button primary" href="#projects">프로젝트 보기</a><a className="button secondary" href="https://github.com/mengmeng-beep" target="_blank" rel="noreferrer">GitHub 방문</a></div>
+    <div className="hero-copy-block"><p className="eyebrow">BACKEND DEVELOPER · WMS · LLM</p><h1>업무의 흐름을 이해하고<br /><span>단단한 시스템을 만듭니다.</span></h1><p className="hero-copy">현장의 문제를 데이터와 API로 구조화하고, 오래 쓰이는 백엔드 시스템으로 구현합니다.</p><div className="actions"><a className="button primary" href={resumeUrl}>이력서 PDF 다운로드</a><a className="button secondary" href="#projects">프로젝트 보기</a></div></div>
+    <div className="hero-profile"><div className="portrait-frame"><img src={profileImage} alt="백엔드 개발자 김지운" /></div><div><strong>김지운</strong><p>Backend Developer</p><a href="mailto:jommeng2@naver.com">jommeng2@naver.com</a><a href="tel:01090926655">010-9092-6655</a></div></div>
   </section>;
 }
 
 function About() {
   return <section id="about" className="section-wrap two-column">
-    <div><p className="eyebrow">ABOUT ME</p><h2>문제를 구조화하고<br />끝까지 개선합니다.</h2></div>
-    <div className="body-copy"><p>백엔드 개발에서는 업무를 도메인 모델과 API로 구조화하는 데 관심이 있으며</p><p>자연어 질문을 검색 조건으로 변환하고 결과를 답변으로 제공하는 LLM 기능을 개발하며 백엔드와 AI를 연결하는 경험을 했습니다.</p><p>WMS 개발 경험을 통해 물류 자동화 현장의 업무 흐름과 창고시스템의 구조를 이해하고, 사용자의 작업을 뒷받침하는 시스템을 고민해 왔습니다.</p></div>
+    <div><p className="eyebrow">01 / ABOUT</p><h2>현장의 흐름을<br />이해하는 개발자</h2></div>
+    <div className="body-copy"><p>처음 개발을 시작한 곳은 물류 현장이었습니다. ㈜진코퍼레이션에서 WMS를 개발하며 창고 안의 작업이 어떤 데이터로 연결되는지, 시스템의 작은 변경이 현장에 어떤 차이를 만드는지 배웠습니다.</p><p>이후 Spring, Oracle, JSP, JPA를 중심으로 웹 백엔드 기술을 익히며 업무를 안정적인 서비스 구조로 옮기는 방법을 고민했습니다. 기능을 만드는 데서 끝나지 않고, 사용하는 사람의 흐름이 끊기지 않는지를 중요하게 봅니다.</p><p>최근에는 데이터분석 마스터클래스를 수료하며 ‘싸부’ 프로젝트에서 문서 임베딩부터 벡터 검색, LLM 응답까지 RAG 기반 QA 시스템을 구축했습니다. 협업할 때는 맡은 일을 끝까지 책임지고, 앞으로는 데이터에서 문제를 발견해 개선 방향을 제시하는 개발자로 성장하고 싶습니다.</p></div>
   </section>;
 }
 
 function Projects() {
-  return <section id="projects" className="section-wrap"><p className="eyebrow">FEATURED PROJECT</p><div className="project-card"><div className="project-number">01</div><div><h2>서울 부동산 가격정보 서비스</h2><p className="project-summary">아파트 가격과 거래동향 데이터를 조회하고, 자연어 질문을 분석해 검색 결과 기반 답변을 제공하는 웹 서비스</p><div className="tags">{tags.map((tag) => <span key={tag}>{tag}</span>)}</div><ul>{projectPoints.map((point) => <li key={point}>{point}</li>)}</ul><a className="text-link" href="https://github.com/mengmeng-beep/seoul-market-price-back" target="_blank" rel="noreferrer">프로젝트 저장소 보기 ↗</a></div></div></section>;
+  return <section id="projects" className="section-wrap projects-section"><div className="section-heading"><div><p className="eyebrow">05 / PROJECTS</p><h2>문제에서 결과까지</h2></div><p>업무의 맥락을 파악하고, 필요한 기술을 골라 실제 흐름으로 연결한 기록입니다.</p></div><div className="project-grid">{projects.map((project) => <article className="project-card" key={project.number}><div className="project-card-top"><span className="project-number">{project.number}</span><span className="project-label">CASE STUDY</span></div><h3>{project.title}</h3><p className="project-summary">{project.summary}</p><div className="project-detail"><div><b>Problem</b><p>{project.problem}</p></div><div><b>My Role</b><p>{project.role}</p></div><div><b>Result</b><p>{project.result}</p></div></div><div className="tags">{project.stack.map((tag) => <span key={tag}>{tag}</span>)}</div>{project.image && <img className="project-image" src={project.image} alt={`${project.title} 아키텍처`} />}<p className="project-link-note">링크 및 성과 수치 업데이트 예정</p></article>)}</div></section>;
 }
 
 function ArchitectureCard({ number, title, description, image, alt, onOpen }) {
@@ -66,13 +89,21 @@ function Skills() {
     };
   }, [selectedArchitecture]);
 
-  return <section id="skills" className="section-wrap skills-section"><p className="eyebrow">TECH STACK</p><h2>기술 스택</h2><div className="skill-grid">{skills.map(([title, content]) => <div key={title}><h3>{title}</h3><p>{content}</p></div>)}</div><div className="architecture-grid"><ArchitectureCard number="01" title="System Architecture" description="서비스 전체 구조와 데이터 흐름" image={systemArchitecture} alt="서울 부동산 가격정보 서비스 시스템 아키텍처" onOpen={setSelectedArchitecture} /><ArchitectureCard number="02" title="AI Architecture" description="자연어 질문 처리와 검색 응답 흐름" image={aiArchitecture} alt="자연어 질문 처리 및 검색 응답 AI 아키텍처" onOpen={setSelectedArchitecture} /></div>{selectedArchitecture && <div className="image-modal" role="dialog" aria-modal="true" aria-label={`${selectedArchitecture.title} 크게 보기`} onClick={() => setSelectedArchitecture(null)}><div className="image-modal-content" onClick={(event) => event.stopPropagation()}><button className="image-modal-close" type="button" onClick={() => setSelectedArchitecture(null)} aria-label="이미지 닫기">×</button><img src={selectedArchitecture.image} alt={selectedArchitecture.alt} /></div></div>}</section>;
+  return <section id="skills" className="section-wrap skills-section"><p className="eyebrow">03 / SKILLS</p><h2>익숙한 도구로<br />정확하게 만듭니다.</h2><div className="skill-grid">{skillGroups.map((group) => <div className="skill-group" key={group.title}><h3>{group.title}</h3><div className="skill-badges">{group.items.map(([name, level]) => <span key={name}>{name}<small>{level}</small></span>)}</div></div>)}</div></section>;
+}
+
+function Experience() {
+  return <section id="experience" className="section-wrap experience-section"><p className="eyebrow">04 / EXPERIENCE</p><h2>현장과 서비스 사이에서<br />쌓아온 경험</h2><div className="timeline">{experience.map((item) => <article className="timeline-item" key={item.company}><span className="timeline-dot" /><div className="timeline-meta"><span>{item.period}</span><strong>{item.company}</strong></div><div><h3>{item.role}</h3><p>{item.result}</p></div></article>)}</div></section>;
+}
+
+function Education() {
+  return <section className="section-wrap education-section"><div><p className="eyebrow">06 / EDUCATION & CERTIFICATES</p><h2>배움을 계속<br />업데이트합니다.</h2></div><div className="education-list"><article><span>2004.03 — 2013.08</span><h3>한성대학교 정보시스템공학과</h3><p>4년제 · 졸업작품: 캡스톤 디자인 방탈출 형식의 퍼즐게임</p></article><article><span>CERTIFICATE</span><h3>워드프로세서 1급</h3></article><article><span>COURSE</span><h3>동아일보 데이터분석 마스터클래스</h3><p>수료</p></article></div></section>;
 }
 
 function Contact() {
-  return <section id="contact" className="contact section-wrap"><p className="eyebrow">CONTACT</p><h2>함께 문제를 해결하고<br />성장하고 싶습니다.</h2><a className="email" href="mailto:jommeng2@gmail.com">jommeng2@gmail.com</a><div className="contact-links"><a href="https://github.com/mengmeng-beep" target="_blank" rel="noreferrer">GitHub ↗</a><a href={resumeUrl}>이력서 PDF ↗</a></div></section>;
+  return <section id="contact" className="contact section-wrap"><p className="eyebrow">07 / CONTACT</p><h2>함께 좋은 시스템을<br />만들고 싶습니다.</h2><p className="contact-copy">문제를 함께 정의하고, 오래 유지되는 해결책을 고민하는 대화를 기다립니다.</p><div className="contact-info"><a className="email" href="mailto:jommeng2@naver.com">jommeng2@naver.com</a><a href="tel:01090926655">010-9092-6655</a></div><div className="contact-links"><a href="https://github.com/mengmeng-beep" target="_blank" rel="noreferrer">GitHub ↗</a><a href={resumeUrl}>이력서 PDF 다운로드 ↗</a></div></section>;
 }
 
 export default function App() {
-  return <><Header /><main id="top"><Hero /><About /><Projects /><Skills /><Contact /></main><footer><p>© 2026 Kim Jiwoon. Built with React & Vite.</p></footer></>;
+  return <><Header /><main id="top"><Hero /><About /><Skills /><Experience /><Projects /><Education /><Contact /></main><footer><p>© 2026 Kim Jiwoon. Built with React & Vite.</p></footer></>;
 }
