@@ -15,27 +15,12 @@ const skillGroups = [
 
 const projects = [
   {
-    number: '01', title: 'WMS 자동화 시스템', summary: '물류센터의 작업 흐름을 연결하고 자동화한 창고관리시스템',
-    problem: '피킹부터 출고까지 이어지는 물류 데이터가 분리되어 작업 흐름과 재고 상태를 빠르게 확인하기 어려웠습니다.',
-    role: 'WMS 구축·고도화와 PLC 연동을 담당하고, 작업 동선과 출고 데이터 흐름을 시스템에 반영했습니다.',
-    stack: ['Java', 'Oracle', 'JSP', 'JPA', 'PLC', 'WMS'],
-    result: '피킹-출고 데이터 흐름을 자동화하고 작업 동선을 개선해 출고 처리 시간을 단축했습니다. 정확한 수치는 추후 보강 예정입니다.',
-    image: systemArchitecture,
-  },
-  {
-    number: '02', title: '싸부 RAG 챗봇 / QA 시스템', summary: '문서를 검색하고 근거 기반 답변을 생성하는 질의응답 시스템',
-    problem: '사용자가 많은 학습 문서에서 원하는 내용을 직접 찾아야 해 질문에 대한 답을 얻는 데 시간이 걸렸습니다.',
-    role: '문서 임베딩부터 벡터DB 저장, 검색, LLM 응답까지 RAG 파이프라인을 설계하고 구현했습니다.',
-    stack: ['Python', 'FastAPI', 'Embedding', 'Vector DB', 'LLM', 'RAG'],
-    result: '자연어 질문을 문서 검색과 연결해, 관련 근거를 바탕으로 답변하는 QA 흐름을 구현했습니다.',
+    number: '01', title: '싸부 RAG 챗봇 / 데이터 분석 학습', summary: '문서를 데이터로 바꾸고, 검색과 LLM을 연결한 질의응답 시스템',
+    problem: '많은 학습 문서에서 원하는 내용을 직접 찾아야 했고, 데이터를 분석해 의미 있는 답변으로 연결하는 과정도 필요했습니다.',
+    role: '데이터분석 마스터클래스에서 문서 임베딩, 벡터DB 저장, 검색, LLM 응답까지 RAG 파이프라인을 구현했습니다. 백엔드 API와 분석 흐름도 함께 설계하며 기술을 실제 서비스 형태로 익혔습니다.',
+    stack: ['Python', 'FastAPI', 'Embedding', 'Vector DB', 'LLM', 'RAG', 'REST API'],
+    result: '자연어 질문을 관련 문서 검색과 연결하고, 검색 근거를 바탕으로 답변하는 QA 흐름을 완성했습니다. 프로젝트 링크와 정량적 결과는 추후 업데이트할 예정입니다.',
     image: aiArchitecture,
-  },
-  {
-    number: '03', title: '개인 학습 프로젝트', summary: '데이터를 읽고 문제를 발견하는 백엔드 실험 공간',
-    problem: '새로운 기술을 단편적으로 익히는 데서 벗어나 데이터 수집부터 API 제공까지 한 흐름으로 경험하고 싶었습니다.',
-    role: '관심 있는 공개 데이터를 정리하고, 조회 API와 간단한 분석 화면을 직접 설계하는 프로젝트로 확장할 예정입니다.',
-    stack: ['Java', 'Spring Boot', 'React', 'REST API'],
-    result: '구체적인 주제와 결과는 프로젝트 진행 후 업데이트할 예정입니다.',
   },
 ];
 
