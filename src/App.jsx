@@ -49,7 +49,7 @@ function Hero() {
       <div className="hero-copy-block">
         <p className="eyebrow">BACKEND DEVELOPER · AMOREPACIFIC WMS · LLM</p>
         <h2>
-          업무의 흐름을 이해하고
+          
           <br />
           <span>단단한 시스템을 만듭니다.</span>
         </h2>
