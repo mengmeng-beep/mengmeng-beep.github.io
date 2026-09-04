@@ -7,11 +7,11 @@ import resumeUrl from '../resume.pdf';
 import '../style.css';
 
 const skillGroups = [
-  { title: 'Languages', items: [['Java', '상'], ['JavaScript', '중'], ['Python', '중']] },
-  { title: 'Backend / Framework', items: [['Spring', '상'], ['Spring Data JPA', '중'], ['FastAPI', '중']] },
+  { title: 'Languages', items: [['Java', '중'], ['JavaScript', '중'], ['Python', '중']] },
+  { title: 'Backend / Framework', items: [['Spring', '중'], ['Spring Data JPA', '중'], ['FastAPI', '중']] },
   { title: 'Frontend', items: [['React', '중'], ['jQuery', '중']] },
-  { title: 'Database', items: [['Oracle', '중'], ['Vector DB', '중']] },
-  { title: 'Domain & AI', items: [['LLM / RAG', '중'], ['PLC 연동', '중'], ['아모레퍼시픽 WMS', '상']] },
+  { title: 'Database', items: [['Oracle', '중'], ['MySql DB', '중']] },
+  { title: 'Domain & AI', items: [['LLM / RAG', '중'], ['PLC 연동', '중'], ['아모레퍼시픽 WMS', '중']] },
 ];
 
 const projects = [
