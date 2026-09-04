@@ -11,7 +11,7 @@ const skillGroups = [
   { title: 'Backend / Framework', items: [['Spring', '중'], ['Spring Data JPA', '중'], ['FastAPI', '중']] },
   { title: 'Frontend', items: [['React', '중'], ['jQuery', '중']] },
   { title: 'Database', items: [['Oracle', '중'], ['MySql DB', '중']] },
-  { title: 'Domain & AI', items: [['LLM / RAG', '중'], ['PLC 연동', '중'], ['아모레퍼시픽 WMS', '중']] },
+  { title: 'Domain & AI', items: [['LLM / RAG', '하'], ['PLC 연동', '중'], ['아모레퍼시픽 WMS', '중']] },
 ];
 
 const projects = [
@@ -27,12 +27,12 @@ const projects = [
 
 const experience = [
   { period: '2016.11 — 2025.12', company: '㈜유로', logo: uroLogo, role: '온라인 커머스 총괄 디렉터', result: '해외 소싱, 국내 유통·판매, 내부 시스템 관리까지 커머스 전 과정을 주도했습니다. 구체적인 성과 수치는 추후 보강 예정입니다.' },
-  { period: '2014.02 — 2016.11', company: '㈜진코퍼레이션', logo: '/images/logo_zin.png', role: '아모레퍼시픽 창고 자동화 시스템 WMS 개발', result: '아모레퍼시픽 창고 자동화 시스템의 WMS 구축과 고도화를 담당했습니다. 입고·보관·피킹·출고까지 이어지는 물류 데이터 흐름을 설계하고 PLC와 연동해 현장 작업이 시스템에서 자연스럽게 이어지도록 구현했습니다.' },
+  { period: '2014.02 — 2016.11', company: '㈜진코퍼레이션', logo: '/images/logo_zin.png', role: '아모레퍼시픽 물류창고 자동화 시스템 WMS 개발', result: '아모레퍼시픽 물류창고 자동화 시스템의 WMS 구축과 고도화를 담당했습니다. 입고·보관·피킹·출고까지 이어지는 물류 데이터 흐름을 설계하고 PLC와 연동해 현장 작업이 시스템에서 자연스럽게 이어지도록 구현했습니다.', stack: ['C#', 'Oracle', 'PLC', '.NET Framework', 'Visual Basic'] },
 ];
 
 function Header() {
   return <header className="site-header">
-    <a className="logo" href="#top">KIM JIWOON</a>
+    <a className="logo" href="#top">KIM JIUN</a>
     <nav aria-label="주요 메뉴">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
@@ -118,7 +118,7 @@ function Skills() {
 }
 
 function Experience() {
-  return <section id="experience" className="section-wrap experience-section"><p className="eyebrow">04 / EXPERIENCE</p><h2>현장과 서비스 사이에서<br />쌓아온 경험</h2><div className="timeline">{experience.map((item) => <article className="timeline-item" key={item.company}><div className="timeline-logo"><img src={item.logo} alt="" onError={(event) => { event.currentTarget.style.display = 'none'; }} /></div><div className="timeline-meta"><span>{item.period}</span><strong>{item.company}</strong></div><div><h3>{item.role}</h3><p>{item.result}</p></div></article>)}</div></section>;
+  return <section id="experience" className="section-wrap experience-section"><p className="eyebrow">04 / EXPERIENCE</p><h2>현장과 서비스 사이에서<br />쌓아온 경험</h2><div className="timeline">{experience.map((item) => <article className="timeline-item" key={item.company}><div className="timeline-logo"><img src={item.logo} alt="" onError={(event) => { event.currentTarget.style.display = 'none'; }} /></div><div className="timeline-meta"><span>{item.period}</span><strong>{item.company}</strong></div><div><h3>{item.role}</h3><p>{item.result}</p>{item.stack && <div className="experience-stack" aria-label="사용 기술 스택"><span>TECH STACK</span><div>{item.stack.map((tech) => <b key={tech}>{tech}</b>)}</div></div>}</div></article>)}</div></section>;
 }
 
 function Education() {
