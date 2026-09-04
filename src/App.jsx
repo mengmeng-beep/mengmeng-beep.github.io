@@ -54,8 +54,7 @@ function Hero() {
           다방면으로 준비 된 인재
         </h2>
         <p className="hero-copy">
-          현장의 문제를 데이터와 API로 구조화하고, 오래 쓰이는 백엔드 시스템으로
-          구현합니다.
+          "기획부터 배포까지, WMS·백엔드·LLM 전 영역에서 쌓은 개발 경험"
         </p>
         <div className="actions">
           <a className="button primary" href={resumeUrl}>
@@ -74,7 +73,8 @@ function Hero() {
           <strong>김지운</strong>
           <p>Backend Developer</p>
           <p>jommeng2@naver.com</p>
-          <p>010-0000-0000</p>
+          <p>010-9092-6655</p>
+          <p>경기도 하남시 미사강변동로84번길 29</p>
         </div>
       </div>
     </section>
