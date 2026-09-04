@@ -1,12 +1,61 @@
 import { useEffect, useState } from 'react';
-import systemArchitecture from '../images/Architecture_system.png';
-import aiArchitecture from '../images/architecture_ai.png';
-import profileImage from '../images/me.jpg';
-import uroLogo from '../images/logo_uro.png';
+import { useQuery } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
 import resumeUrl from '../resume.pdf';
 import '../style.css';
 
-const skillGroups = [
+type SkillGroup = {
+  title: string;
+  items: [string, string][];
+};
+
+type Project = {
+  number: string;
+  title: string;
+  summary: string;
+  problem: string;
+  role: string;
+  result: string;
+  stack: string[];
+  image: string;
+};
+
+type ExperienceItem = {
+  period: string;
+  company: string;
+  logo: string;
+  role: string;
+  result: string;
+  stack?: string[];
+};
+
+type PortfolioFormValues = {
+  skillGroups: SkillGroup[];
+  projects: Project[];
+  experience: ExperienceItem[];
+};
+
+type Architecture = {
+  image: string;
+  alt: string;
+  title: string;
+};
+
+type ArchitectureCardProps = Architecture & {
+  number: string;
+  description: string;
+  onOpen: (architecture: Architecture) => void;
+};
+
+const images = {
+  systemArchitecture: '/images/Architecture_system.png',
+  aiArchitecture: '/images/architecture_ai.png',
+  profile: '/images/me.jpg',
+  uroLogo: '/images/logo_uro.png',
+  zinLogo: '/images/logo_zin.png',
+};
+
+const skillGroups: SkillGroup[] = [
   { title: 'Languages', items: [['Java', '중'], ['JavaScript', '중'], ['Python', '중']] },
   { title: 'Backend / Framework', items: [['Spring', '중'], ['Spring Data JPA', '중'], ['FastAPI', '중']] },
   { title: 'Frontend', items: [['React', '중'], ['jQuery', '중']] },
@@ -14,21 +63,23 @@ const skillGroups = [
   { title: 'Domain & AI', items: [['LLM / RAG', '하'], ['PLC 연동', '중'], ['아모레퍼시픽 WMS', '중']] },
 ];
 
-const projects = [
+const projects: Project[] = [
   {
     number: '01', title: '싸부 RAG 챗봇 / 데이터 분석 학습', summary: '문서를 데이터로 바꾸고, 검색과 LLM을 연결한 질의응답 시스템',
     problem: '많은 학습 문서에서 원하는 내용을 직접 찾아야 했고, 데이터를 분석해 의미 있는 답변으로 연결하는 과정도 필요했습니다.',
     role: '데이터분석 마스터클래스에서 문서 임베딩, 벡터DB 저장, 검색, LLM 응답까지 RAG 파이프라인을 구현했습니다. 백엔드 API와 분석 흐름도 함께 설계하며 기술을 실제 서비스 형태로 익혔습니다.',
     stack: ['Python', 'FastAPI', 'Embedding', 'Vector DB', 'LLM', 'RAG', 'REST API'],
     result: '자연어 질문을 관련 문서 검색과 연결하고, 검색 근거를 바탕으로 답변하는 QA 흐름을 완성했습니다. 프로젝트 링크와 정량적 결과는 추후 업데이트할 예정입니다.',
-    image: aiArchitecture,
+    image: images.aiArchitecture,
   },
 ];
 
-const experience = [
-  { period: '2016.11 — 2025.12', company: '㈜유로', logo: uroLogo, role: '온라인 커머스 총괄 디렉터', result: '해외 소싱, 국내 유통·판매, 내부 시스템 관리까지 커머스 전 과정을 주도했습니다. 구체적인 성과 수치는 추후 보강 예정입니다.' },
-  { period: '2014.02 — 2016.11', company: '㈜진코퍼레이션', logo: '/images/logo_zin.png', role: '아모레퍼시픽 물류창고 자동화 시스템 WMS 개발', result: '아모레퍼시픽 물류창고 자동화 시스템의 WMS 구축과 고도화를 담당했습니다. 입고·보관·피킹·출고까지 이어지는 물류 데이터 흐름을 설계하고 PLC와 연동해 현장 작업이 시스템에서 자연스럽게 이어지도록 구현했습니다.', stack: ['C#', 'Oracle', 'PLC', '.NET Framework', 'Visual Basic'] },
+const experience: ExperienceItem[] = [
+  { period: '2016.11 — 2025.12', company: '㈜유로', logo: images.uroLogo, role: '온라인 커머스 총괄 디렉터', result: '해외 소싱, 국내 유통·판매, 내부 시스템 관리까지 커머스 전 과정을 주도했습니다. 구체적인 성과 수치는 추후 보강 예정입니다.' },
+  { period: '2014.02 — 2016.11', company: '㈜진코퍼레이션', logo: images.zinLogo, role: '아모레퍼시픽 물류창고 자동화 시스템 WMS 개발', result: '아모레퍼시픽 물류창고 자동화 시스템의 WMS 구축과 고도화를 담당했습니다. 입고·보관·피킹·출고까지 이어지는 물류 데이터 흐름을 설계하고 PLC와 연동해 현장 작업이 시스템에서 자연스럽게 이어지도록 구현했습니다.', stack: ['C#', 'Oracle', 'PLC', '.NET Framework', 'Visual Basic'] },
 ];
+
+const portfolioData: PortfolioFormValues = { skillGroups, projects, experience };
 
 function Header() {
   return <header className="site-header">
@@ -67,7 +118,7 @@ function Hero() {
       </div>
       <div className="hero-profile">
         <div className="portrait-frame">
-          <img src={profileImage} alt="백엔드 개발자 김지운" />
+          <img src={images.profile} alt="백엔드 개발자 김지운" />
         </div>
         <div>
           <strong>김지운</strong>
@@ -88,20 +139,20 @@ function About() {
   </section>;
 }
 
-function Projects() {
+function Projects({ projects }: Pick<PortfolioFormValues, 'projects'>) {
   return <section id="projects" className="section-wrap projects-section"><div className="section-heading"><div><p className="eyebrow">05 / PROJECTS</p><h2>문제에서 결과까지</h2></div><p>업무의 맥락을 파악하고, 필요한 기술을 골라 실제 흐름으로 연결한 기록입니다.</p></div><div className="project-grid">{projects.map((project) => <article className="project-card" key={project.number}><div className="project-card-top"><span className="project-number">{project.number}</span><span className="project-label">CASE STUDY</span></div><h3>{project.title}</h3><p className="project-summary">{project.summary}</p><div className="project-detail"><div><b>Problem</b><p>{project.problem}</p></div><div><b>My Role</b><p>{project.role}</p></div><div><b>Result</b><p>{project.result}</p></div></div><div className="tags">{project.stack.map((tag) => <span key={tag}>{tag}</span>)}</div><p className="project-link-note">링크 및 성과 수치 업데이트 예정</p></article>)}</div><ArchitectureGallery /></section>;
 }
 
-function ArchitectureCard({ number, title, description, image, alt, onOpen }) {
+function ArchitectureCard({ number, title, description, image, alt, onOpen }: ArchitectureCardProps) {
   return <figure className="architecture-card"><figcaption><span>{number}</span><strong>{title}</strong><small>{description}</small></figcaption><button className="architecture-preview" type="button" onClick={() => onOpen({ image, alt, title })} aria-label={`${title} 크게 보기`}><img src={image} alt={alt} /></button></figure>;
 }
 
 function ArchitectureGallery() {
-  const [selectedArchitecture, setSelectedArchitecture] = useState(null);
+  const [selectedArchitecture, setSelectedArchitecture] = useState<Architecture | null>(null);
 
   useEffect(() => {
     if (!selectedArchitecture) return undefined;
-    const closeOnEscape = (event) => event.key === 'Escape' && setSelectedArchitecture(null);
+    const closeOnEscape = (event: KeyboardEvent) => event.key === 'Escape' && setSelectedArchitecture(null);
     document.addEventListener('keydown', closeOnEscape);
     document.body.style.overflow = 'hidden';
     return () => {
@@ -110,14 +161,14 @@ function ArchitectureGallery() {
     };
   }, [selectedArchitecture]);
 
-  return <div className="architecture-gallery"><div className="architecture-gallery-heading"><p className="eyebrow">ARCHITECTURE</p><p>이미지를 클릭하면 전체 구조를 크게 볼 수 있습니다.</p></div><div className="architecture-grid"><ArchitectureCard number="01" title="Backend Architecture" description="프로젝트 백엔드를 담당하며 다룬 기술들입니다." image={systemArchitecture} alt="아모레퍼시픽 창고 자동화 시스템 아키텍처" onOpen={setSelectedArchitecture} /><ArchitectureCard number="02" title="AI / RAG Architecture" description="싸부 RAG 챗봇의 검색 및 응답 흐름" image={aiArchitecture} alt="싸부 RAG 챗봇 AI 아키텍처" onOpen={setSelectedArchitecture} /></div>{selectedArchitecture && <div className="image-modal" role="dialog" aria-modal="true" aria-label={`${selectedArchitecture.title} 크게 보기`} onClick={() => setSelectedArchitecture(null)}><div className="image-modal-content" onClick={(event) => event.stopPropagation()}><button className="image-modal-close" type="button" onClick={() => setSelectedArchitecture(null)} aria-label="이미지 닫기">×</button><img src={selectedArchitecture.image} alt={selectedArchitecture.alt} /></div></div>}</div>;
+  return <div className="architecture-gallery"><div className="architecture-gallery-heading"><p className="eyebrow">ARCHITECTURE</p><p>이미지를 클릭하면 전체 구조를 크게 볼 수 있습니다.</p></div><div className="architecture-grid"><ArchitectureCard number="01" title="Backend Architecture" description="프로젝트 백엔드를 담당하며 다룬 기술들입니다." image={images.systemArchitecture} alt="아모레퍼시픽 창고 자동화 시스템 아키텍처" onOpen={setSelectedArchitecture} /><ArchitectureCard number="02" title="AI / RAG Architecture" description="싸부 RAG 챗봇의 검색 및 응답 흐름" image={images.aiArchitecture} alt="싸부 RAG 챗봇 AI 아키텍처" onOpen={setSelectedArchitecture} /></div>{selectedArchitecture && <div className="image-modal" role="dialog" aria-modal="true" aria-label={`${selectedArchitecture.title} 크게 보기`} onClick={() => setSelectedArchitecture(null)}><div className="image-modal-content" onClick={(event) => event.stopPropagation()}><button className="image-modal-close" type="button" onClick={() => setSelectedArchitecture(null)} aria-label="이미지 닫기">×</button><img src={selectedArchitecture.image} alt={selectedArchitecture.alt} /></div></div>}</div>;
 }
 
-function Skills() {
+function Skills({ skillGroups }: Pick<PortfolioFormValues, 'skillGroups'>) {
   return <section id="skills" className="section-wrap skills-section"><p className="eyebrow">03 / SKILLS</p><h2>익숙한 도구로<br />정확하게 만듭니다.</h2><div className="skill-grid">{skillGroups.map((group) => <div className="skill-group" key={group.title}><h3>{group.title}</h3><div className="skill-badges">{group.items.map(([name, level]) => <span key={name}>{name}<small>{level}</small></span>)}</div></div>)}</div></section>;
 }
 
-function Experience() {
+function Experience({ experience }: Pick<PortfolioFormValues, 'experience'>) {
   return <section id="experience" className="section-wrap experience-section"><p className="eyebrow">04 / EXPERIENCE</p><h2>현장과 서비스 사이에서<br />쌓아온 경험</h2><div className="timeline">{experience.map((item) => <article className="timeline-item" key={item.company}><div className="timeline-logo"><img src={item.logo} alt="" onError={(event) => { event.currentTarget.style.display = 'none'; }} /></div><div className="timeline-meta"><span>{item.period}</span><strong>{item.company}</strong></div><div><h3>{item.role}</h3><p>{item.result}</p>{item.stack && <div className="experience-stack" aria-label="사용 기술 스택"><span>TECH STACK</span><div>{item.stack.map((tech) => <b key={tech}>{tech}</b>)}</div></div>}</div></article>)}</div></section>;
 }
 
@@ -130,5 +181,20 @@ function Contact() {
 }
 
 export default function App() {
-  return <><Header /><main id="top"><Hero /><About /><Skills /><Experience /><Projects /><Education /><Contact /></main><footer><p>© 2026 Kim Jiwoon. Built with React & Vite.</p></footer></>;
+  const { setValue, watch } = useForm<PortfolioFormValues>({ defaultValues: portfolioData });
+  const { data } = useQuery({
+    queryKey: ['portfolio'],
+    queryFn: async (): Promise<PortfolioFormValues> => portfolioData,
+    select: (response): PortfolioFormValues => response,
+    staleTime: Infinity,
+  });
+
+  useEffect(() => {
+    if (!data) return;
+    setValue('skillGroups', data.skillGroups);
+    setValue('projects', data.projects);
+    setValue('experience', data.experience);
+  }, [data, setValue]);
+
+  return <><Header /><main id="top"><Hero /><About /><Skills skillGroups={watch('skillGroups')} /><Experience experience={watch('experience')} /><Projects projects={watch('projects')} /><Education /><Contact /></main><footer><p>© 2026 Kim Jiwoon. Built with React & Vite.</p></footer></>;
 }
