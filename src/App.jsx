@@ -49,9 +49,9 @@ function Hero() {
       <div className="hero-copy-block">
         <p className="eyebrow">BACKEND DEVELOPER · AMOREPACIFIC WMS · LLM</p>
         <h2>
-          
+          WMS개발/백엔드/LLM 시스템 경험
           <br />
-          <span>단단한 시스템을 만듭니다.</span>
+          다방면으로 준비 된 인재
         </h2>
         <p className="hero-copy">
           현장의 문제를 데이터와 API로 구조화하고, 오래 쓰이는 백엔드 시스템으로
@@ -126,7 +126,7 @@ function Education() {
 }
 
 function Contact() {
-  return <section id="contact" className="contact section-wrap"><p className="eyebrow">07 / CONTACT</p><h2>함께 좋은 시스템을<br />만들고 싶습니다.</h2><p className="contact-copy">문제를 함께 정의하고, 오래 유지되는 해결책을 고민하는 대화를 기다립니다.</p><div className="contact-info">jommeng2@naver.com<br />010-0000-0000</div><div className="contact-links"><a href="https://github.com/mengmeng-beep" target="_blank" rel="noreferrer">GitHub ↗</a><a href={resumeUrl}>이력서 PDF 다운로드 ↗</a></div></section>;
+  return <section id="contact" className="contact section-wrap"><p className="eyebrow">07 / CONTACT</p><h2>함께 좋은 시스템을<br />만들고 싶습니다.</h2><p className="contact-copy">문제를 함께 정의하고, 오래 유지되는 해결책을 고민하는 대화를 기다립니다.</p><div className="contact-info">jommeng2@naver.com<br />010-9092-6655</div><div className="contact-links"><a href="https://github.com/mengmeng-beep" target="_blank" rel="noreferrer">GitHub ↗</a><a href={resumeUrl}>이력서 PDF 다운로드 ↗</a></div></section>;
 }
 
 export default function App() {
