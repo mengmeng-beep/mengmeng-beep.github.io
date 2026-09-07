@@ -173,7 +173,7 @@ function Experience({ experience }: Pick<PortfolioFormValues, 'experience'>) {
 }
 
 function Education() {
-  return <section className="section-wrap education-section"><div><p className="eyebrow">06 / EDUCATION & CERTIFICATES</p><h2>배움을 계속<br />업데이트합니다.</h2></div><div className="education-list"><article><span>2004.03 — 2013.08</span><h3>한성대학교 정보시스템공학과</h3><p>4년제 · 졸업작품: 캡스톤 디자인 방탈출 형식의 퍼즐게임</p></article><article><span>CERTIFICATE</span><h3>워드프로세서 1급</h3></article><article><span>COURSE</span><h3>동아일보 데이터분석 마스터클래스</h3><p>수료</p></article></div></section>;
+  return <section className="section-wrap education-section"><div><p className="eyebrow">06 / EDUCATION & CERTIFICATES</p><h2>배움을 계속<br />업데이트합니다.</h2></div><div className="education-list"><article><span>2004.03 — 2013.08</span><h3>한성대학교 정보시스템공학과</h3><p>4년제 · 졸업작품: 캡스톤 디자인 방탈출 형식의 퍼즐게임</p></article><article><span>CERTIFICATE</span><h3>워드프로세서 1급</h3></article><article><span>COURSE</span><p className="course-period">2026.05 — 2026.09</p><h3>동아일보 데이터분석 마스터클래스</h3><p>수료</p></article></div></section>;
 }
 
 function Contact() {
